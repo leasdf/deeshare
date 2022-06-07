@@ -35,48 +35,47 @@ async def start(bot: Client, cmd: Message):
         back = await handle_force_sub(bot, cmd)
         if back == 400:
             return
-    elif cmd.from_user.id in Config.AUTH_USERS:
-        if usr_cmd == "/start":
-            await AddUserToDatabase(bot, cmd)
-            await cmd.reply_text(
-                Config.HOME_TEXT.format(cmd.from_user.first_name, cmd.from_user.id),
-                parse_mode="Markdown",
-                disable_web_page_preview=True,
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton("👨‍💻 Support 👨‍💻", url="https://t.me/lakshyajee12thpw2023discussion"),
-                            InlineKeyboardButton("⚜ Channel ⚜", url="https://t.me/lakshyajeepw2023freeh")
-                                            ],
-                                            [
-                            InlineKeyboardButton("💝 About 💝", callback_data="aboutbot"),
-                            InlineKeyboardButton("🚸 Owner ", url="https://t.me/LegendDeepanshu")
-                        ],
-                                            [
-                            InlineKeyboardButton("🔐 Cʟᴏsᴇ ", callback_data="closeMessage") 
-                        ]
-                    ]
-                )
+    if usr_cmd == "/start":
+        await AddUserToDatabase(bot, cmd)
+        await cmd.reply_text(
+            Config.HOME_TEXT.format(cmd.from_user.first_name, cmd.from_user.id),
+            parse_mode="Markdown",
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+				[
+					[
+						InlineKeyboardButton("👨‍💻 Support 👨‍💻", url="https://t.me/LegendBot_OP"),
+						InlineKeyboardButton("⚜ Channel ⚜", url="https://t.me/LegendBot_AI")
+                                        ],
+                                        [
+						InlineKeyboardButton("💝 About 💝", callback_data="aboutbot"),
+						InlineKeyboardButton("🚸 Owner ", url="https://t.me/LegendBoy_XD")
+					],
+                                        [
+						InlineKeyboardButton("🔐 Cʟᴏsᴇ ", callback_data="closeMessage") 
+					]
+				]
             )
-        else:
-            try:
-                try:
-                    file_id = int(b64_to_str(usr_cmd).split("_")[-1])
-                except (Error, UnicodeDecodeError):
-                    file_id = int(usr_cmd.split("_")[-1])
-                GetMessage = await bot.get_messages(chat_id=Config.DB_CHANNEL, message_ids=file_id)
-                message_ids = []
-                if GetMessage.text:
-                    message_ids = GetMessage.text.split(" ")
-                else:
-                    message_ids.append(int(GetMessage.message_id))
-                for i in range(len(message_ids)):
-                    await SendMediaAndReply(bot, user_id=cmd.from_user.id, file_id=int(message_ids[i]))
-            except Exception as err:
-                await cmd.reply_text(f"Something went wrong May Be My [Owner](https://t.me/LegendDeepanshu) Deleted Your Data!\n\n**Error:** `{err}`")
+        )
     else:
-        await cmd.reply_text("Buy The Subscriptions From @legendDeepanshu At Low Prize To Use This Command This is a Permanent FileStore Bot. Send Me any Media or File.I can Work In Channel too Add Me to Channel with Edit Permission, I will add save Uploaded File in Channel and Share a Shareable Link.")
-
+        try:
+            try:
+                file_id = int(b64_to_str(usr_cmd).split("_")[-1])
+            except (Error, UnicodeDecodeError):
+                file_id = int(usr_cmd.split("_")[-1])
+            GetMessage = await bot.get_messages(chat_id=Config.DB_CHANNEL, message_ids=file_id)
+            message_ids = []
+            if GetMessage.text:
+                message_ids = GetMessage.text.split(" ")
+            else:
+                message_ids.append(int(GetMessage.message_id))
+            for i in range(len(message_ids)):
+                await SendMediaAndReply(bot, user_id=cmd.from_user.id, file_id=int(message_ids[i]))
+        except Exception as err:
+            await cmd.reply_text(f"Something went wrong May Be My [Owner](https://t.me/LegendBoy_XD) Deleted Your Data!\n\n**Error:** `{err}`")
+	
+	
+	
 @pyrogram.Client.on_message((filters.document | filters.video | filters.audio) & ~filters.edited & ~filters.chat(Config.DB_CHANNEL))
 async def main(bot: Client, message: Message):
 
