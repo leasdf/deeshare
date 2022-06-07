@@ -1,10 +1,4 @@
-
-if bool(os.environ.get("WEBHOOK", False)):
-    from sample_config import Config
-else:
-    from configs import Config
-
-	import os
+import os
 import logging
 import pyrogram
 
