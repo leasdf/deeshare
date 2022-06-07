@@ -36,9 +36,6 @@ async def _(bot: Client, cmd: Message):
 
 @bot.on_message(filters.command("start") & filters.private)
 async def start(bot: Client, cmd: Message):
-    if cmd.from_user.id not in Config.AUTH_CHANNEL:
-        await cmd.reply_text("Sorry, U dont have subscription Buy The Subscriptions From @legendDeepanshu At Low Prize To Use This Command ")
-        return
     if cmd.from_user.id in Config.BANNED_USERS:
         await cmd.reply_text("Sorry, You are banned.")
         return
@@ -46,47 +43,48 @@ async def start(bot: Client, cmd: Message):
         back = await handle_force_sub(bot, cmd)
         if back == 400:
             return
-    
-    usr_cmd = cmd.text.split("_", 1)[-1]
-    if usr_cmd == "/start":
-        await AddUserToDatabase(bot, cmd)
-        await cmd.reply_text(
-            Config.HOME_TEXT.format(cmd.from_user.first_name, cmd.from_user.id),
-            parse_mode="Markdown",
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-				[
-					[
-						InlineKeyboardButton("👨‍💻 Support 👨‍💻", url="https://t.me/lakshyajee12thpw2023discussion"),
-						InlineKeyboardButton("⚜ Channel ⚜", url="https://t.me/lakshyajeepw2023freeh")
-                                        ],
-                                        [
-						InlineKeyboardButton("💝 About 💝", callback_data="aboutbot"),
-						InlineKeyboardButton("🚸 Owner ", url="https://t.me/LegendDeepanshu")
-					],
-                                        [
-						InlineKeyboardButton("🔐 Cʟᴏsᴇ ", callback_data="closeMessage") 
-					]
-				]
+    if cmd.from_user.id in Config.AUTH_USERS:
+	usr_cmd = cmd.text.split("_", 1)[-1]
+        if usr_cmd == "/start":
+            await AddUserToDatabase(bot, cmd)
+            await cmd.reply_text(
+                Config.HOME_TEXT.format(cmd.from_user.first_name, cmd.from_user.id),
+                parse_mode="Markdown",
+                disable_web_page_preview=True,
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("👨‍💻 Support 👨‍💻", url="https://t.me/lakshyajee12thpw2023discussion"),
+                            InlineKeyboardButton("⚜ Channel ⚜", url="https://t.me/lakshyajeepw2023freeh")
+                                            ],
+                                            [
+                            InlineKeyboardButton("💝 About 💝", callback_data="aboutbot"),
+                            InlineKeyboardButton("🚸 Owner ", url="https://t.me/LegendDeepanshu")
+                        ],
+                                            [
+                            InlineKeyboardButton("🔐 Cʟᴏsᴇ ", callback_data="closeMessage") 
+                        ]
+                    ]
+                )
             )
-        )
-    else:
-        try:
+        else:
             try:
-                file_id = int(b64_to_str(usr_cmd).split("_")[-1])
-            except (Error, UnicodeDecodeError):
-                file_id = int(usr_cmd.split("_")[-1])
-            GetMessage = await bot.get_messages(chat_id=Config.DB_CHANNEL, message_ids=file_id)
-            message_ids = []
-            if GetMessage.text:
-                message_ids = GetMessage.text.split(" ")
-            else:
-                message_ids.append(int(GetMessage.message_id))
-            for i in range(len(message_ids)):
-                await SendMediaAndReply(bot, user_id=cmd.from_user.id, file_id=int(message_ids[i]))
-        except Exception as err:
-            await cmd.reply_text(f"Something went wrong May Be My [Owner](https://t.me/LegendDeepanshu) Deleted Your Data!\n\n**Error:** `{err}`")
-
+                try:
+                    file_id = int(b64_to_str(usr_cmd).split("_")[-1])
+                except (Error, UnicodeDecodeError):
+                    file_id = int(usr_cmd.split("_")[-1])
+                GetMessage = await bot.get_messages(chat_id=Config.DB_CHANNEL, message_ids=file_id)
+                message_ids = []
+                if GetMessage.text:
+                    message_ids = GetMessage.text.split(" ")
+                else:
+                    message_ids.append(int(GetMessage.message_id))
+                for i in range(len(message_ids)):
+                    await SendMediaAndReply(bot, user_id=cmd.from_user.id, file_id=int(message_ids[i]))
+            except Exception as err:
+                await cmd.reply_text(f"Something went wrong May Be My [Owner](https://t.me/LegendDeepanshu) Deleted Your Data!\n\n**Error:** `{err}`")
+    else:
+        await cmd.reply_text("Sorry, U dont have subscription Buy The Subscriptions From @legendDeepanshu At Low Prize To Use This Command ")
 
 @bot.on_message((filters.document | filters.video | filters.audio) & ~filters.edited & ~filters.chat(Config.DB_CHANNEL))
 async def main(bot: Client, message: Message):
