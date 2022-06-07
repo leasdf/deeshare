@@ -20,7 +20,7 @@ BOT_TOKEN = "5495370777:AAE_wxsdpo5RmDVFbgexUSxVxZnSIMGKeFs"
 BOT_USERNAME = "pwfilestore_bot"
 AUTH_USERS = set(int(x) for x in os.environ.get("AUTH_USERS", "1234567890").split()
 		 
-MediaList = {}
+
 Bot = Client(BOT_USERNAME, bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH)
 
 
@@ -105,7 +105,6 @@ async def main(bot: Client, message: Message):
         await message.reply_text(
             text="**Choose an option from below:**",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Save in Batch", callback_data="addToBatchTrue")],
                 [InlineKeyboardButton("Get Sharable Link", callback_data="addToBatchFalse")]
             ]),
             quote=True,
@@ -271,11 +270,6 @@ async def _banned_users(_, m: Message):
     await m.reply_text(reply_text, True)
 
 
-@Bot.on_message(filters.private & filters.command("clear_batch"))
-async def clear_user_batch(bot: Client, m: Message):
-    MediaList[f"{str(m.from_user.id)}"] = []
-    await m.reply_text("Cleared your batch files successfully!")
-
 
 @Bot.on_callback_query()
 async def button(bot: Client, cmd: CallbackQuery):
@@ -406,29 +400,9 @@ async def button(bot: Client, cmd: CallbackQuery):
         except Exception as e:
             await cmd.answer(f"Can't Ban Him!\n\nError: {e}", show_alert=True)
 
-    elif "addToBatchTrue" in cb_data:
-        if MediaList.get(f"{str(cmd.from_user.id)}", None) is None:
-            MediaList[f"{str(cmd.from_user.id)}"] = []
-        file_id = cmd.message.reply_to_message.message_id
-        MediaList[f"{str(cmd.from_user.id)}"].append(file_id)
-        await cmd.message.edit("File Saved in Batch!\n\n"
-                               "Press below button to get batch link.",
-                               reply_markup=InlineKeyboardMarkup([
-                                   [InlineKeyboardButton("Get Batch Link", callback_data="getBatchLink")],
-                                   [InlineKeyboardButton("Close Message", callback_data="closeMessage")]
-                               ]))
 
     elif "addToBatchFalse" in cb_data:
         await SaveMediaInChannel(bot, editable=cmd.message, message=cmd.message.reply_to_message)
-
-    elif "getBatchLink" in cb_data:
-        message_ids = MediaList.get(f"{str(cmd.from_user.id)}", None)
-        if message_ids is None:
-            await cmd.answer("Batch List Empty!", show_alert=True)
-            return
-        await cmd.message.edit("Please wait, generating batch link ...")
-        await SaveBatchMediaInChannel(bot=bot, editable=cmd.message, message_ids=message_ids)
-        MediaList[f"{str(cmd.from_user.id)}"] = []
 
     elif "closeMessage" in cb_data:
         await cmd.message.delete(True)
