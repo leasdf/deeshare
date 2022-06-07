@@ -36,6 +36,7 @@ async def _(bot: Client, cmd: Message):
 
 @bot.on_message(filters.command("start") & filters.private)
 async def start(bot: Client, cmd: Message):
+    usr_cmd = cmd.text.split("_", 1)[-1]
     if cmd.from_user.id in Config.BANNED_USERS:
         await cmd.reply_text("Sorry, You are banned.")
         return
@@ -43,7 +44,6 @@ async def start(bot: Client, cmd: Message):
         back = await handle_force_sub(bot, cmd)
         if back == 400:
             return
-    usr_cmd = cmd.text.split("_", 1)[-1]
     elif cmd.from_user.id in Config.AUTH_USERS:
         if usr_cmd == "/start":
             await AddUserToDatabase(bot, cmd)
