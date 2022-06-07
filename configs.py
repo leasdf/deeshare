@@ -2,6 +2,10 @@
 import os
 
 class Config(object):
+	API_HASH = "5d3831feb6752d0a6904accac2008250"
+	API_ID = 9325118
+	BOT_TOKEN = "5495370777:AAE_wxsdpo5RmDVFbgexUSxVxZnSIMGKeFs"
+	BOT_USERNAME = "pwfilestore_bot"
         AUTH_USERS = set(int(x) for x in os.environ.get("AUTH_USERS", "1123564262").split()
 	DB_CHANNEL = "-1001770626286"
 	BOT_OWNER = "1123564262"
