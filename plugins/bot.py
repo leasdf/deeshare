@@ -15,7 +15,6 @@ from handlers.check_user_status import handle_user_status
 from handlers.force_sub_handler import handle_force_sub
 from handlers.broadcast_handlers import main_broadcast_handler
 from handlers.save_media import SaveMediaInChannel, SaveBatchMediaInChannel
-from bot import bot
 if bool(os.environ.get("WEBHOOK", False)):
     from sample_config import Config
 else:
