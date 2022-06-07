@@ -21,12 +21,12 @@ if bool(os.environ.get("WEBHOOK", False)):
 else:
     from configs import Config
 
-@bot.on_message(filters.private)
+@pyrogram.Client.on_message(filters.private)
 async def _(bot: Client, cmd: Message):
     await handle_user_status(bot, cmd)
 
 
-@bot.on_message(filters.command("start") & filters.private)
+@pyrogram.Client.on_message(filters.command("start") & filters.private)
 async def start(bot: Client, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
     if cmd.from_user.id in Config.BANNED_USERS:
@@ -78,7 +78,7 @@ async def start(bot: Client, cmd: Message):
     else:
         await cmd.reply_text("Sorry, U dont have subscription Buy The Subscriptions From @legendDeepanshu At Low Prize To Use This Command ")
 
-@bot.on_message((filters.document | filters.video | filters.audio) & ~filters.edited & ~filters.chat(Config.DB_CHANNEL))
+@pyrogram.Client.on_message((filters.document | filters.video | filters.audio) & ~filters.edited & ~filters.chat(Config.DB_CHANNEL))
 async def main(bot: Client, message: Message):
 
     if message.chat.type == "private":
@@ -146,18 +146,18 @@ async def main(bot: Client, message: Message):
             )
 
 
-@bot.on_message(filters.private & filters.command("broadcast") & filters.user(Config.BOT_OWNER) & filters.reply)
+@pyrogram.Client.on_message(filters.private & filters.command("broadcast") & filters.user(Config.BOT_OWNER) & filters.reply)
 async def broadcast_handler_open(_, m: Message):
     await main_broadcast_handler(m, db)
 
 
-@bot.on_message(filters.private & filters.command("status") & filters.user(Config.BOT_OWNER))
+@pyrogram.Client.on_message(filters.private & filters.command("status") & filters.user(Config.BOT_OWNER))
 async def sts(_, m: Message):
     total_users = await db.total_users_count()
     await m.reply_text(text=f"**Total Users in DB:** `{total_users}`", parse_mode="Markdown", quote=True)
 
 
-@bot.on_message(filters.private & filters.command("ban_user") & filters.user(Config.BOT_OWNER))
+@pyrogram.Client.on_message(filters.private & filters.command("ban_user") & filters.user(Config.BOT_OWNER))
 async def ban(c: Client, m: Message):
     
     if len(m.command) == 1:
@@ -201,7 +201,7 @@ async def ban(c: Client, m: Message):
         )
 
 
-@bot.on_message(filters.private & filters.command("unban_user") & filters.user(Config.BOT_OWNER))
+@pyrogram.Client.on_message(filters.private & filters.command("unban_user") & filters.user(Config.BOT_OWNER))
 async def unban(c: Client, m: Message):
 
     if len(m.command) == 1:
@@ -240,7 +240,7 @@ async def unban(c: Client, m: Message):
         )
 
 
-@bot.on_message(filters.private & filters.command("banned_users") & filters.user(Config.BOT_OWNER))
+@pyrogram.Client.on_message(filters.private & filters.command("banned_users") & filters.user(Config.BOT_OWNER))
 async def _banned_users(_, m: Message):
     
     all_banned_users = await db.get_all_banned_users()
@@ -266,7 +266,7 @@ async def _banned_users(_, m: Message):
 
 
 
-@bot.on_callback_query()
+@pyrogram.Client.on_callback_query()
 async def button(bot: Client, cmd: CallbackQuery):
 
     cb_data = cmd.data
