@@ -14,19 +14,20 @@ from handlers.check_user_status import handle_user_status
 from handlers.force_sub_handler import handle_force_sub
 from handlers.broadcast_handlers import main_broadcast_handler
 from handlers.save_media import SaveMediaInChannel, SaveBatchMediaInChannel
-API_HASH = "5d3831feb6752d0a6904accac2008250"
 
-API_ID = "9325118"
+if bool(os.environ.get("WEBHOOK", False)):
+    from sample_config import Config
+else:
+    from configs import Config
 
-BOT_TOKEN = "5495370777:AAE_wxsdpo5RmDVFbgexUSxVxZnSIMGKeFs"
-
-BOT_USERNAME = "pwfilestore_bot"
-
-AUTH_USERS = set(int(x) for x in os.environ.get("AUTH_USERS", "1234567890").split()
 		 
 
-bot = Client(BOT_USERNAME, bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH)
-
+bot = pyrogram.Client(
+        "LegendBot",
+        bot_token=Config.BOT_TOKEN,
+        api_id=Config.APP_ID,
+        api_hash=Config.API_HASH
+    )
 
 @bot.on_message(filters.private)
 async def _(bot: Client, cmd: Message):
