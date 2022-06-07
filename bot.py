@@ -15,21 +15,25 @@ from handlers.force_sub_handler import handle_force_sub
 from handlers.broadcast_handlers import main_broadcast_handler
 from handlers.save_media import SaveMediaInChannel, SaveBatchMediaInChannel
 API_HASH = "5d3831feb6752d0a6904accac2008250"
+
 API_ID = "9325118"
+
 BOT_TOKEN = "5495370777:AAE_wxsdpo5RmDVFbgexUSxVxZnSIMGKeFs"
+
 BOT_USERNAME = "pwfilestore_bot"
+
 AUTH_USERS = set(int(x) for x in os.environ.get("AUTH_USERS", "1234567890").split()
 		 
 
-Bot = Client(BOT_USERNAME, bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH)
+bot = Client(BOT_USERNAME, bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH)
 
 
-@Bot.on_message(filters.private)
+@bot.on_message(filters.private)
 async def _(bot: Client, cmd: Message):
     await handle_user_status(bot, cmd)
 
 
-@Bot.on_message(filters.command("start") & filters.private)
+@bot.on_message(filters.command("start") & filters.private)
 async def start(bot: Client, cmd: Message):
     if cmd.from_user.id not in Config.AUTH_CHANNEL:
         await cmd.reply_text("Sorry, U dont have subscription Buy The Subscriptions From @legendDeepanshu At Low Prize To Use This Command ")
@@ -83,7 +87,7 @@ async def start(bot: Client, cmd: Message):
             await cmd.reply_text(f"Something went wrong May Be My [Owner](https://t.me/LegendDeepanshu) Deleted Your Data!\n\n**Error:** `{err}`")
 
 
-@Bot.on_message((filters.document | filters.video | filters.audio) & ~filters.edited & ~filters.chat(Config.DB_CHANNEL))
+@bot.on_message((filters.document | filters.video | filters.audio) & ~filters.edited & ~filters.chat(Config.DB_CHANNEL))
 async def main(bot: Client, message: Message):
 
     if message.chat.type == "private":
@@ -151,18 +155,18 @@ async def main(bot: Client, message: Message):
             )
 
 
-@Bot.on_message(filters.private & filters.command("broadcast") & filters.user(Config.BOT_OWNER) & filters.reply)
+@bot.on_message(filters.private & filters.command("broadcast") & filters.user(Config.BOT_OWNER) & filters.reply)
 async def broadcast_handler_open(_, m: Message):
     await main_broadcast_handler(m, db)
 
 
-@Bot.on_message(filters.private & filters.command("status") & filters.user(Config.BOT_OWNER))
+@bot.on_message(filters.private & filters.command("status") & filters.user(Config.BOT_OWNER))
 async def sts(_, m: Message):
     total_users = await db.total_users_count()
     await m.reply_text(text=f"**Total Users in DB:** `{total_users}`", parse_mode="Markdown", quote=True)
 
 
-@Bot.on_message(filters.private & filters.command("ban_user") & filters.user(Config.BOT_OWNER))
+@bot.on_message(filters.private & filters.command("ban_user") & filters.user(Config.BOT_OWNER))
 async def ban(c: Client, m: Message):
     
     if len(m.command) == 1:
@@ -206,7 +210,7 @@ async def ban(c: Client, m: Message):
         )
 
 
-@Bot.on_message(filters.private & filters.command("unban_user") & filters.user(Config.BOT_OWNER))
+@bot.on_message(filters.private & filters.command("unban_user") & filters.user(Config.BOT_OWNER))
 async def unban(c: Client, m: Message):
 
     if len(m.command) == 1:
@@ -245,7 +249,7 @@ async def unban(c: Client, m: Message):
         )
 
 
-@Bot.on_message(filters.private & filters.command("banned_users") & filters.user(Config.BOT_OWNER))
+@bot.on_message(filters.private & filters.command("banned_users") & filters.user(Config.BOT_OWNER))
 async def _banned_users(_, m: Message):
     
     all_banned_users = await db.get_all_banned_users()
@@ -271,7 +275,7 @@ async def _banned_users(_, m: Message):
 
 
 
-@Bot.on_callback_query()
+@bot.on_callback_query()
 async def button(bot: Client, cmd: CallbackQuery):
 
     cb_data = cmd.data
@@ -347,7 +351,7 @@ async def button(bot: Client, cmd: CallbackQuery):
             except UserNotParticipant:
                 invite_link = await bot.create_chat_invite_link(int(Config.UPDATES_CHANNEL))
                 await cmd.message.edit(
-                    text="**You still didn't joined my Updates Channel 😑, Please Join My Updates Channel**\n\nDue to Overload Only Channel Subscribers can Use this Bot",
+                    text="**You still didn't joined my Updates Channel 😑, Please Join My Updates Channel**\n\nDue to Overload Only Channel Subscribers can Use this bot",
 	            reply_markup=InlineKeyboardMarkup(
 						[
 							[
@@ -379,7 +383,7 @@ async def button(bot: Client, cmd: CallbackQuery):
 						InlineKeyboardButton("🔆 Channel ", url="https://t.me/lakshyajeepw2023freeh")
 					],
 					[
-						InlineKeyboardButton("🤖 About Bot", callback_data="aboutbot"),
+						InlineKeyboardButton("🤖 About bot", callback_data="aboutbot"),
 						InlineKeyboardButton("👮 About Devs", callback_data="aboutdevs")
 					]
 				]
@@ -412,4 +416,4 @@ async def button(bot: Client, cmd: CallbackQuery):
     except QueryIdInvalid:
         pass
 
-Bot.run()
+bot.run()
