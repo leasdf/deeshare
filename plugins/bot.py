@@ -75,7 +75,7 @@ async def start(bot: Client, cmd: Message):
             except Exception as err:
                 await cmd.reply_text(f"Something went wrong May Be My [Owner](https://t.me/LegendDeepanshu) Deleted Your Data!\n\n**Error:** `{err}`")
     else:
-        await cmd.reply_text("Sorry, U dont have subscription Buy The Subscriptions From @legendDeepanshu At Low Prize To Use This Command ")
+        await cmd.reply_text("Buy The Subscriptions From @legendDeepanshu At Low Prize To Use This Command This is a Permanent FileStore Bot. Send Me any Media or File.I can Work In Channel too Add Me to Channel with Edit Permission, I will add save Uploaded File in Channel and Share a Shareable Link.")
 
 @pyrogram.Client.on_message((filters.document | filters.video | filters.audio) & ~filters.edited & ~filters.chat(Config.DB_CHANNEL))
 async def main(bot: Client, message: Message):
