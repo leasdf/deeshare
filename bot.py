@@ -39,12 +39,12 @@ async def start(bot: Client, cmd: Message):
     if cmd.from_user.id in Config.BANNED_USERS:
         await cmd.reply_text("Sorry, You are banned.")
         return
-    if Config.UPDATES_CHANNEL is not None:
+    elif Config.UPDATES_CHANNEL is not None:
         back = await handle_force_sub(bot, cmd)
         if back == 400:
             return
-    if cmd.from_user.id in Config.AUTH_USERS:
-	usr_cmd = cmd.text.split("_", 1)[-1]
+    usr_cmd = cmd.text.split("_", 1)[-1]
+    elif cmd.from_user.id in Config.AUTH_USERS:
         if usr_cmd == "/start":
             await AddUserToDatabase(bot, cmd)
             await cmd.reply_text(
