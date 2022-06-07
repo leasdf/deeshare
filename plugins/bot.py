@@ -92,7 +92,10 @@ async def main(bot: Client, message: Message):
             await message.reply_text("Sorry, You are banned!\n\nContact [Support Group](https://t.me/lakshyajee12thpw2023discussion)",
                                      disable_web_page_preview=True)
             return
-
+        if message.from_user.id not in Config.AUTH_USERS:
+            await message.reply_text("Buy The Subscription from @LegendDeepanshu to use thi command\n\nIt Will Help U To Protect From copyright and many more thing",
+                                     disable_web_page_preview=True)
+            return
         if Config.OTHER_USERS_CAN_SAVE_FILE is False:
             return
         await message.reply_text(
