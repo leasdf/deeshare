@@ -26,7 +26,9 @@ async def _(bot: Client, cmd: Message):
 
 @Bot.on_message(filters.command("start") & filters.private)
 async def start(bot: Client, cmd: Message):
-
+    if cmd.from_user.id not in Config.AUTH_CHANNEL:
+        await cmd.reply_text("Sorry, U dont have subscription Buy The Subscriptions From @legendDeepanshu At Low Prize To Use This Command ")
+        return
     if cmd.from_user.id in Config.BANNED_USERS:
         await cmd.reply_text("Sorry, You are banned.")
         return
@@ -45,12 +47,12 @@ async def start(bot: Client, cmd: Message):
             reply_markup=InlineKeyboardMarkup(
 				[
 					[
-						InlineKeyboardButton("👨‍💻 Support 👨‍💻", url="https://t.me/LegendBot_OP"),
-						InlineKeyboardButton("⚜ Channel ⚜", url="https://t.me/LegendBot_AI")
+						InlineKeyboardButton("👨‍💻 Support 👨‍💻", url="https://t.me/lakshyajee12thpw2023discussion"),
+						InlineKeyboardButton("⚜ Channel ⚜", url="https://t.me/lakshyajeepw2023freeh")
                                         ],
                                         [
 						InlineKeyboardButton("💝 About 💝", callback_data="aboutbot"),
-						InlineKeyboardButton("🚸 Owner ", url="https://t.me/LegendBoy_XD")
+						InlineKeyboardButton("🚸 Owner ", url="https://t.me/LegendDeepanshu")
 					],
                                         [
 						InlineKeyboardButton("🔐 Cʟᴏsᴇ ", callback_data="closeMessage") 
@@ -73,7 +75,7 @@ async def start(bot: Client, cmd: Message):
             for i in range(len(message_ids)):
                 await SendMediaAndReply(bot, user_id=cmd.from_user.id, file_id=int(message_ids[i]))
         except Exception as err:
-            await cmd.reply_text(f"Something went wrong May Be My [Owner](https://t.me/LegendBoy_XD) Deleted Your Data!\n\n**Error:** `{err}`")
+            await cmd.reply_text(f"Something went wrong May Be My [Owner](https://t.me/LegendDeepanshu) Deleted Your Data!\n\n**Error:** `{err}`")
 
 
 @Bot.on_message((filters.document | filters.video | filters.audio) & ~filters.edited & ~filters.chat(Config.DB_CHANNEL))
@@ -89,7 +91,7 @@ async def main(bot: Client, message: Message):
                 return
 
         if message.from_user.id in Config.BANNED_USERS:
-            await message.reply_text("Sorry, You are banned!\n\nContact [Support Group](https://t.me/LegendBot_Op)",
+            await message.reply_text("Sorry, You are banned!\n\nContact [Support Group](https://t.me/lakshyajee12thpw2023discussion)",
                                      disable_web_page_preview=True)
             return
 
@@ -318,12 +320,12 @@ async def button(bot: Client, cmd: CallbackQuery):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-						InlineKeyboardButton("👨‍💻 Support 👨‍💻", url="https://t.me/LEGENDBOT_OP"),
-						InlineKeyboardButton("⚜ Channel ⚜", url="https://t.me/LegendBot_AI")
+						InlineKeyboardButton("👨‍💻 Support 👨‍💻", url="https://t.me/lakshyajee12thpw2023discussion"),
+						InlineKeyboardButton("⚜ Channel ⚜", url="https://t.me/lakshyajeepw2023freeh")
                                         ],
                                         [
 						InlineKeyboardButton("❤ About ❤", callback_data="aboutbot"),
-						InlineKeyboardButton("💟 Owner 💟", url="https://t.me/LegendBoy_XD")
+						InlineKeyboardButton("💟 Owner 💟", url="https://t.me/LegendDeepanshu")
 					],
                                         [
 						InlineKeyboardButton("🔐 Close ", callback_data="closeMessage") 
@@ -362,7 +364,7 @@ async def button(bot: Client, cmd: CallbackQuery):
                 return
             except Exception:
                 await cmd.message.edit(
-                    text="Something went Wrong. Contact my [Support Group](https://t.me/LegendBot_OP).",
+                    text="Something went Wrong. Contact my [Support Group](https://t.me/lakshyajee12thpw2023discussion).",
                     parse_mode="markdown",
                     disable_web_page_preview=True
                 )
@@ -374,8 +376,8 @@ async def button(bot: Client, cmd: CallbackQuery):
             reply_markup=InlineKeyboardMarkup(
 				[
 					[
-						InlineKeyboardButton("🔅 Support ", url="https://t.me/LegendBot_OP"),
-						InlineKeyboardButton("🔆 Channel ", url="https://t.me/LegendBot_AI")
+						InlineKeyboardButton("🔅 Support ", url="https://t.me/lakshyajee12thpw2023discussion"),
+						InlineKeyboardButton("🔆 Channel ", url="https://t.me/lakshyajeepw2023freeh")
 					],
 					[
 						InlineKeyboardButton("🤖 About Bot", callback_data="aboutbot"),

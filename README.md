@@ -41,6 +41,6 @@ banned_users - Get All Banned Users [Owner Only]
 ```
 
 ### 𝐒𝐮𝐩𝐩𝐨𝐫𝐭 𝐆𝐫𝐨𝐮𝐩:
-<a href="https://t.me/LegendBot_OP"><img src="https://img.shields.io/badge/Telegram-Join%20Telegram%20Group-green.svg?logo=telegram"></a>
+<a href="https://t.me/lakshyajee12thpw2023discussion"><img src="https://img.shields.io/badge/Telegram-Join%20Telegram%20Group-green.svg?logo=telegram"></a>
 ### 𝐔𝐩𝐝𝐚𝐭𝐞𝐬 𝐂𝐡𝐚𝐧𝐧𝐞𝐥:
-<a href="https://t.me/LegendBot_AI"><img src="https://img.shields.io/badge/Telegram-Join%20Telegram%20Channel-yellow.svg?logo=telegram"></a>
+<a href="https://t.me/lakshyajeepw2023freeh"><img src="https://img.shields.io/badge/Telegram-Join%20Telegram%20Channel-yellow.svg?logo=telegram"></a>

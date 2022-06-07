@@ -30,16 +30,16 @@ Send Me any Media or File.I can Work In Channel too Add Me to Channel with Edit 
 │
 ├🔹📡 **Hosted On:** [Heroku](https://heroku.com)
 │
-├🔸👨‍💻 **Developer:** [LegendBoy](https://t.me/LegendBoy_XD) 
+├🔸👨‍💻 **Developer:** [Deepanshu](https://t.me/LegendDeepanshu) 
 │
-├🔹👥 **Bot Support:** [Support](https://t.me/LegendBot_OP)
+├🔹👥 **Bot Support:** [Support](https://t.me/lakshyajee12thpw2023discussion)
 │
-├🔸🔔 **Bot Updates:** [Update](https://t.me/LegendBot_AI)
+├🔸🔔 **Bot Updates:** [Update](https://t.me/lakshyajeepw2023freeh)
 │
 ╰──────[ 😎 ]───────────⍟
 """
 	ABOUT_DEV_TEXT = f"""
-🧑🏻‍💻 **Developer:** [LegendBoy](https://t.me/LegendBoy_XD) 
+🧑🏻‍💻 **Developer:** [LegendDeepanshu](https://t.me/LegendDeepanshu) 
 
 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝐢𝐬 𝐒𝐮𝐩𝐞𝐫 𝐍𝐨𝐨𝐛😅.
 
@@ -47,7 +47,7 @@ Send Me any Media or File.I can Work In Channel too Add Me to Channel with Edit 
  
 𝐀𝐥𝐬𝐨 𝐫𝐞𝐦𝐞𝐦𝐛𝐞𝐫 𝐭𝐡𝐚𝐭 𝐝𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝐰𝐢𝐥𝐥 𝐃𝐞𝐥𝐞𝐭𝐞 𝐀𝐝𝐮𝐥𝐭 𝐂𝐨𝐧𝐭𝐞𝐧𝐭𝐬 𝐟𝐫𝐨𝐦 𝐃𝐚𝐭𝐚𝐛𝐚𝐬𝐞. 𝐒𝐨 𝐛𝐞𝐭𝐭𝐞𝐫 𝐝𝐨𝐧'𝐭 𝐒𝐭𝐨𝐫𝐞 𝐓𝐡𝐨𝐬𝐞 𝐊𝐢𝐧𝐝 𝐨𝐟 𝐓𝐡𝐢𝐧𝐠𝐬.
 
-[Donate Me](https://t.me/LegendBoy_XD) (Contact)
+[Donate Me](https://t.me/LegendDeepanshu) (Contact)
 """
 	HOME_TEXT = """
 Hello, [{}](tg://user?id={})\n\nThis is a Permanent **FileStore Bot**.
