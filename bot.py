@@ -1,6 +1,7 @@
 import os
 import asyncio
 import traceback
+import pyrogram
 from binascii import Error
 from pyrogram import Client, filters
 from pyrogram.errors import UserNotParticipant, FloodWait, QueryIdInvalid
