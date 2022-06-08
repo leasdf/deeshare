@@ -297,7 +297,7 @@ async def button(bot: Client, cmd: CallbackQuery):
             reply_markup=InlineKeyboardMarkup(
                 [
                                         [
-						InlineKeyboardButton("🔅 Source Code ", url="https://github.com/LEGEND-AI")
+						InlineKeyboardButton("🔅 Owner ", url="https://t.me/legenddeepanshu")
 					],
 					[
 						InlineKeyboardButton("👥 About ", callback_data="aboutbot"),
